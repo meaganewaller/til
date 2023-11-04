@@ -5,3 +5,5 @@ gem 'rspec'
 gem 'rack-test'
 gem 'simplecov'
 gem 'webmock'
+
+gem "slim", "~> 5.1"

@@ -9,11 +9,13 @@ RSpec.describe Til::App do
 
   it 'responds with a 200 status code' do
     get '/'
+
     expect(last_response.status).to eq(200)
   end
 
-  it 'responds with "TIL!" in the body' do
+  it 'responds with html content in the body' do
     get '/'
-    expect(last_response.body).to eq('TIL!')
+
+    expect(last_response.body).to include('<!DOCTYPE html>')
   end
 end
