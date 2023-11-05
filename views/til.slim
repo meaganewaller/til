@@ -6,7 +6,7 @@ html
     link rel="stylesheet" href="/assets/css/style.css" media="screen"
     title All TILs
   body
-    .splash
+    .til
       .content
         .topbar
           .buttons
@@ -14,7 +14,14 @@ html
             span
             span
         h1 💡 TIL: Ruby on Rack
-        textarea.til-content placeholder="Wanna share what you learned?"
-        .button-container
-          button.btn#til Share TIL
-          a.share(href="/") Back to home
+        .learnings
+          ul.learnings-inner
+            - tils.each do |til|
+              li= til[:content]
+        form#til-form action="/til" method="POST"
+          label for="content"  Today I learned...
+          textarea.til-content#content name="content" placeholder="Wanna share what you learned?"
+          br
+          .button-container
+            button.btn#til Share TIL
+            a.share(href="/") Back to home
