@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 
+ruby '3.2.2'
+
+gem 'faye-websocket'
 gem 'rack'
-gem 'rspec'
 gem 'rack-test'
+gem 'rspec'
 gem 'simplecov'
 gem 'webmock'
 
-gem "slim", "~> 5.1"
+gem 'slim', '~> 5.1'

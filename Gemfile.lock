@@ -7,6 +7,10 @@ GEM
       rexml
     diff-lcs (1.5.0)
     docile (1.4.0)
+    eventmachine (1.2.7)
+    faye-websocket (0.11.3)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     hashdiff (1.0.1)
     public_suffix (5.0.3)
     rack (3.0.8)
@@ -41,18 +45,25 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
+    websocket-driver (0.7.6)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
 
 PLATFORMS
   x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
+  faye-websocket
   rack
   rack-test
   rspec
   simplecov
   slim (~> 5.1)
   webmock
+
+RUBY VERSION
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.21
