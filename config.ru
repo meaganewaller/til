@@ -3,6 +3,10 @@
 require 'rack'
 require_relative 'app'
 require 'sequel'
+require_relative 'lib/middleware/rate_limiter'
+
+use Rack::Session::Cookie, key: 'rack.session', secret: ENV['SESSION_SECRET']
+use Til::Middleware::RateLimiter, rate_limit: 10, time_window: 60
 
 use Rack::Static, urls: ['/assets'], root: 'public'
 

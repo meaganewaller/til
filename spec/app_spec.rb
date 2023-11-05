@@ -25,6 +25,14 @@ RSpec.describe Til::App do
     expect(last_response.body).to include('I learned something!')
   end
 
+  describe 'post /' do
+    it 'increments the counter' do
+      post '/'
+
+      expect(last_response.body).to include('1')
+    end
+  end
+
   describe 'get /til' do
     it 'responds with html content in the body' do
       get '/til'
