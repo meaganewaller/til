@@ -168,3 +168,51 @@ h5,h6 {font-size: 1em; font-weight:bold}
   background: none;
   box-shadow: none;
 }
+
+.button-container .share {
+  display: flex;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  justify-content: center;
+  color: #0070C0;
+}
+
+.button-container .share:hover {
+  color: #3399ff;
+}
+
+textarea.til-content {
+  font-size: 1.5rem;
+  font-family: var(--sans);
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 0.5em;
+  padding: 1em;
+  width: 77%;
+  height: 200px;
+  color: #333;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-top: 5%;
+}
+
+textarea.til-content:focus {
+  border: 2px solid #0070c0;
+}
+
+textarea.til-content:hover {
+  border: 2px solid #0070c0;
+}
+
+textarea.til-content::placeholder {
+  color: #888;
+}
+
+textarea.til-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+textarea.til-content::-webkit-scrollbar-thumb {
+  background-color: #0070C0;
+}

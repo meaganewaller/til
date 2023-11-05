@@ -1,5 +1,5 @@
-require 'rack'
-require 'slim'
+require "rack"
+require "slim"
 
 module Til
   class App
@@ -8,10 +8,20 @@ module Til
         run lambda { |_env|
           [
             200,
-            { 'Content-Type' => 'text/html' },
-            [Til::App.render_template('index')]
+            {"Content-Type" => "text/html"},
+            [Til::App.render_template("index")]
           ]
         }
+
+        map '/til' do
+          run lambda { |_env|
+            [
+              200,
+              { 'Content-Type' => 'text/html' },
+              [Til::App.render_template('til')]
+            ]
+          }
+        end
       end.to_app
     end
 
@@ -20,7 +30,7 @@ module Til
     end
 
     def self.render_template(template_name)
-      template_path = File.join(File.dirname(__FILE__), 'views', "#{template_name}.slim")
+      template_path = File.join(File.dirname(__FILE__), "views", "#{template_name}.slim")
       template = File.read(template_path)
       Slim::Template.new { template }.render(self)
     end
