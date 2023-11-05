@@ -5,6 +5,7 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     meta charset="utf-8"
     link rel="stylesheet" href="/assets/css/style.css" media="screen"
+    script src="/assets/js/counter.js"
   body
     .splash
       .content
@@ -16,7 +17,7 @@ html
         h1💡 TIL: Ruby on Rack
         .til-count
           .til-count-inner
-            p 10
+            p#counter= counter
         .button-container
           button.btn#til I learned something!
           a.share(href="/til") Wanna share what you learned?

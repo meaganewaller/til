@@ -5,13 +5,18 @@ module Til
   class App
     def initialize(db)
       @db = db
+      @counter = read_counter
     end
 
     def call(env)
       request = Rack::Request.new(env)
       case request.path
       when '/'
-        index_response
+        if request.request_method == 'GET'
+          index_response
+        elsif request.request_method == 'POST'
+          increment_counter
+        end
       when '/til'
         if request.request_method == 'GET'
           view_tils
@@ -25,6 +30,18 @@ module Til
 
     private
 
+    def read_counter
+      File.read('./til_count.txt').to_i
+    end
+
+    def increment_counter
+      @counter += 1
+
+      File.write('./til_count.txt', @counter.to_s)
+
+      index_response
+    end
+
     def render_view(view_name, locals = {})
       template = File.read("views/#{view_name}.slim")
       rendered = Slim::Template.new { template }.render(self, locals)
@@ -32,7 +49,8 @@ module Til
     end
 
     def index_response
-      render_view('index')
+      counter = @counter
+      render_view('index', { counter: })
     end
 
     def render_not_found
