@@ -47,6 +47,7 @@ h5,h6 {font-size: 1em; font-weight:bold}
 .splash {
   position: relative;
   width: 90%;
+  max-width: 1200px;
   padding-top: calc(100% / 1.77);
   margin: 0 auto;
   display: flex;
@@ -62,8 +63,9 @@ h5,h6 {font-size: 1em; font-weight:bold}
   bottom: 0;
   width: 100%;
   height: 100%;
+  max-height: 700px;
   background-color: #F1EDE4;
-  margin: 50% auto;
+  margin: 10% auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -105,24 +107,33 @@ h5,h6 {font-size: 1em; font-weight:bold}
   background-color: #FFD700;
   color: #000;
   box-shadow: -3px 0 0 #FFD700, 3px 0 0 #FFD700;
-  width: 50%;
+  width: 70%;
   text-align: center;
 }
 
 .content .button-container {
   margin-top: auto;
-  margin-bottom: 4%;
-  width: 75%;
+  position: relative;
+  width: 90%;
 }
 
 .til-count {
   width: 50%;
-  height: 50%;
+  height: 30%;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+  font-family: var(--retro);
+  display: flex;
+  margin-top: 3rem;
+}
+
+.til-count-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 8rem;
-  font-family: var(--retro);
+  height: 100%;
+  position: relative;
 }
 
 .button-container button {
@@ -134,7 +145,7 @@ h5,h6 {font-size: 1em; font-weight:bold}
   transition: all 175ms cubic-bezier(0, 0, 1, 1);
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 1em 2em;
   cursor: pointer;
   position: relative;
@@ -175,6 +186,7 @@ h5,h6 {font-size: 1em; font-weight:bold}
   font-size: 1.5rem;
   justify-content: center;
   color: #0070C0;
+  padding-bottom: .5em;
 }
 
 .button-container .share:hover {
@@ -215,4 +227,37 @@ textarea.til-content::-webkit-scrollbar {
 
 textarea.til-content::-webkit-scrollbar-thumb {
   background-color: #0070C0;
+}
+
+@media (max-width: 960px) {
+  .splash {
+    position: relative;
+    padding-top: 0;
+    height: 75vh;
+  }
+
+  .content {
+    max-height: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .topbar {
+    display: none;
+  }
+
+  .content h1 {
+    width: 90%;
+    line-height: 1.2;
+    font-size: 1.5rem;
+  }
+
+  .button-container button {
+    font-size: 1rem;
+    padding: .5em 1em;
+  }
+
+  .button-container .share {
+    font-size: 1rem;
+  }
 }
