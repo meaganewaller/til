@@ -18,4 +18,30 @@ RSpec.describe Til::App do
 
     expect(last_response.body).to include('<!DOCTYPE html>')
   end
+
+  it 'responds with a button with I learned something!' do
+    get '/'
+
+    expect(last_response.body).to include('I learned something!')
+  end
+
+  describe "get /til" do
+    it 'responds with html content in the body' do
+      get '/til'
+
+      expect(last_response.body).to include('<!DOCTYPE html>')
+    end
+
+    it 'responds with a 200 status code' do
+      get '/til'
+
+      expect(last_response.status).to eq(200)
+    end
+
+    it 'responds with textarea in the body' do
+      get '/til'
+
+      expect(last_response.body).to include('textarea')
+    end
+  end
 end
