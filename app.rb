@@ -1,30 +1,53 @@
 require 'rack'
 require 'slim'
+require 'faye/websocket'
 
 module Til
   class App
+    TIL_MESSAGE_TYPE = 'til_created'
+
     def initialize(db)
       @db = db
       @counter = read_counter
+      @connections = []
     end
 
     def call(env)
-      request = Rack::Request.new(env)
-      case request.path
-      when '/'
-        if request.request_method == 'GET'
-          index_response
-        elsif request.request_method == 'POST'
-          increment_counter
+      if Faye::WebSocket.websocket?(env)
+        ws = Faye::WebSocket.new(env, nil, { ping: 5 })
+
+        ws.on(:open) do |_event|
+          @connections << ws
         end
-      when '/til'
-        if request.request_method == 'GET'
-          view_tils
-        elsif request.request_method == 'POST'
-          create_til(env)
+
+        ws.on(:message) do |event|
+          message = event.data
         end
+
+        ws.on(:close) do |_event|
+          @connections.delete(ws)
+          ws = nil
+        end
+
+        ws.rack_response
       else
-        render_not_found
+        request = Rack::Request.new(env)
+        case request.path
+        when '/'
+          if request.request_method == 'GET'
+            index_response
+          elsif request.request_method == 'POST'
+            increment_counter
+          end
+        when '/til'
+          if request.request_method == 'GET'
+            view_tils
+          elsif request.request_method == 'POST'
+            create_til(env)
+          end
+        else
+          render_not_found
+        end
       end
     end
 
@@ -71,7 +94,20 @@ module Til
 
       insert_til(content)
 
-      view_tils
+      notify_til_update(content)
+
+      [201, { 'Content-Type' => 'application/json' }, [{ message: content }.to_json]]
+    end
+
+    def notify_til_update(content)
+      message = {
+        type: TIL_MESSAGE_TYPE,
+        content:
+      }
+
+      @connections.each do |ws|
+        ws.send(message.to_json)
+      end
     end
 
     def insert_til(content)

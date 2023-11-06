@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
       particleCount: 150,
       spread: 100,
       origin: {
-        y: 0.6
-      }
+        y: 0.80,
+      },
     });
   });
 });

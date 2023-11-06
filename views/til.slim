@@ -15,9 +15,11 @@ html
             span
         h1 💡 TIL: Ruby on Rack
         .learnings
-          ul.learnings-inner
+          ul#learnings.learnings-inner
             - tils.each do |til|
               li= til[:content]
+        #output
+          p Thanks for sharing what you learned!
         form#til-form action="/til" method="POST"
           label for="content"  Today I learned...
           textarea.til-content#content name="content" placeholder="Wanna share what you learned?"
@@ -25,3 +27,41 @@ html
           .button-container
             button.btn#til Share TIL
             a.share(href="/") Back to home
+  javascript:
+    const form = document.getElementById('til-form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const content = document.getElementById('content').value;
+      const xhr = new XMLHttpRequest();
+
+      xhr.open('POST', '/til', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send(`content=${content}`);
+    })
+
+    const socket = new WebSocket('ws://localhost:9292/til');
+
+    socket.addEventListener('message', (event) => {
+      const message = JSON.parse(event.data);
+
+      if (message.type == 'til_created') {
+        document.getElementById('output').style.display = 'block';
+        const list = document.getElementById('learnings');
+        list.insertAdjacentHTML("afterbegin", `<li>${message.content}</li>`);
+        document.getElementById('til-form').reset();
+      };
+    });
+
+    socket.onopen = (event) => {
+      console.log('WebSocket connection opened:', event);
+
+      document.getElementById('til').addEventListener('click', () => {
+        const message = document.getElementById('content').value;
+        socket.send(message);
+      });
+    };
+
+    socket.onclose = (event) => {
+      console.log('WebSocket connection closed:', event);
+    };
