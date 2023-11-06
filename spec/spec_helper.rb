@@ -20,7 +20,10 @@ require 'rack/test'
 require 'sequel'
 
 require_relative '../app'
-DB = Sequel.sqlite
+require_relative '../lib/middleware/rate_limiter'
+require_relative '../lib/middleware/input_validation'
+
+DB = Sequel.connect('postgres://127.0.0.1/til_test')
 
 RSpec.configure do |config|
   config.before(:suite) do
@@ -29,8 +32,12 @@ RSpec.configure do |config|
       String :content, as: :text, null: true
     end
   end
+
+  config.after(:suite) do
+    DB.drop_table(:learnings)
+  end
   config.around(:each) do |example|
-    DB.transaction(rollback: :always, auto_savepoint: true){example.run}
+    DB.transaction(rollback: :always, auto_savepoint: true) { example.run }
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

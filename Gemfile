@@ -18,3 +18,5 @@ group :test, :development do
   gem 'simplecov', '0.22.0', require: false
 end
 
+
+gem "sanitize", "~> 6.1"
