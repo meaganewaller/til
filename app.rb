@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rack'
 require 'slim'
 require 'faye/websocket'
@@ -68,24 +70,24 @@ module Til
     def render_view(view_name, locals = {})
       template = File.read("views/#{view_name}.slim")
       rendered = Slim::Template.new { template }.render(self, locals)
-      [200, { 'Content-Type' => 'text/html' }, [rendered]]
+      [200, { 'content-type' => 'text/html' }, [rendered]]
     end
 
     def index_response
       counter = @counter
-      render_view('index', { counter: })
+      render_view('index', { counter: counter })
     end
 
     def render_not_found
       template = File.read('views/not_found.slim')
       rendered = Slim::Template.new { template }.render(self)
-      [404, { 'Content-Type' => 'text/html' }, [rendered]]
+      [404, { 'content-type' => 'text/html' }, [rendered]]
     end
 
     def view_tils
       tils = retrieve_tils || []
 
-      render_view('til', { tils: })
+      render_view('til', { tils: tils })
     end
 
     def create_til(env)
@@ -96,13 +98,13 @@ module Til
 
       notify_til_update(content)
 
-      [201, { 'Content-Type' => 'application/json' }, [{ message: content }.to_json]]
+      [201, { 'content-type' => 'application/json' }, [{ message: content }.to_json]]
     end
 
     def notify_til_update(content)
       message = {
         type: TIL_MESSAGE_TYPE,
-        content:
+        content: content
       }
 
       @connections.each do |ws|
@@ -111,7 +113,7 @@ module Til
     end
 
     def insert_til(content)
-      @db[:learnings].insert(content:)
+      @db[:learnings].insert(content: content)
     end
 
     def retrieve_tils
