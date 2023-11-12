@@ -15,5 +15,9 @@ services:
         fromDatabase:
           name: til
           property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
       - key: SECRET_KEY_BASE
         generateValue: true
+      - key: BASE_URL
+        value: "https://til-f9rd.onrender.com"
