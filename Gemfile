@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby File.read('.ruby-version').strip
+ruby '3.2.2'
 
 gem 'pg', '~> 1.5'
 gem 'rack', '~> 2.2'
@@ -22,3 +22,5 @@ gem 'sanitize', '~> 6.1'
 gem 'faye-websocket', '~> 0.11.3'
 
 gem 'rack-session'
+
+gem "rackup", "~> 1.0"
