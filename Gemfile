@@ -3,8 +3,7 @@ source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
 gem 'pg', '~> 1.5'
-gem 'rack', '3.0.8',
-#     path: '/Users/meaganwaller/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/rack-3.0.8'
+gem 'rack', '3.0.8'
 gem 'rackup', '~> 2.1'
 gem 'rake', '13.1.0'
 gem 'sequel', '~> 5.74'

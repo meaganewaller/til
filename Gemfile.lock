@@ -81,6 +81,7 @@ DEPENDENCIES
   pg (~> 1.5)
   pry (= 0.14.2)
   pry-byebug (= 3.10.1)
+  rack (= 3.0.8)
   rack-session
   rack-test (= 2.1.0)
   rackup (~> 2.1)
