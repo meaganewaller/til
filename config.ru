@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "rack"
-require "rackup"
 require "faye/websocket"
 require_relative "app"
 require "sequel"
