@@ -40,7 +40,7 @@ html
       xhr.send(`content=${content}`);
     })
 
-    const socket = new WebSocket("ws://#{ENV['BASE_URL']}/til");
+    const socket = new WebSocket("wss://#{ENV['BASE_URL']}/til");
 
     socket.addEventListener('message', (event) => {
       const message = JSON.parse(event.data);
