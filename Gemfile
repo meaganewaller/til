@@ -3,8 +3,7 @@ source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
 gem 'pg', '~> 1.5'
-gem 'rack', '3.0.8'
-gem 'rackup', '~> 2.1'
+gem 'rack', '~> 2.2'
 gem 'rake', '13.1.0'
 gem 'sequel', '~> 5.74'
 gem 'slim', '~> 5.1'
