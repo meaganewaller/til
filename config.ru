@@ -5,7 +5,7 @@ require "rackup"
 require "faye/websocket"
 require_relative "app"
 require "sequel"
-require "thin"
+require "puma"
 require_relative "lib/middleware/rate_limiter"
 require_relative "lib/middleware/input_validation"
 
@@ -22,7 +22,7 @@ use Rack::Static, urls: ["/assets"], root: "public"
 
 db = Sequel.connect(ENV["DATABASE_URL"] || "postgres://127.0.0.1/til_development")
 
-Faye::WebSocket.load_adapter("thin")
+Faye::WebSocket.load_adapter("puma")
 
 app = Til::App.new(db)
 

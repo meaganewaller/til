@@ -24,3 +24,5 @@ gem 'faye-websocket', '~> 0.11.3'
 gem 'rack-session'
 
 gem "rackup", "~> 1.0"
+
+gem "puma", "~> 6.4"
