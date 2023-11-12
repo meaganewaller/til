@@ -1,4 +1,4 @@
-- databases:
+databases:
   - name: til
     databaseName: til_production
     user: til
