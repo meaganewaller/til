@@ -20,4 +20,4 @@ services:
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: BASE_URL
-        value: "https://til-f9rd.onrender.com"
+        value: "til-f9rd.onrender.com"
