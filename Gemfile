@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 
 gem 'pg', '~> 1.5'
-gem 'rack', '~> 2.2'
+gem 'rack', '~> 2.2'#, path: "/Users/meaganwaller/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/rack-2.2.8"
 gem 'rake', '13.1.0'
 gem 'sequel', '~> 5.74'
 gem 'slim', '~> 5.1'
